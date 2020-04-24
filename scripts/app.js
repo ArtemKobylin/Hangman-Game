@@ -7,10 +7,11 @@
 const guessedLettersElem = document.querySelector("#guessed-letters")
 const puzzleElem = document.querySelector("#puzzle")
 const guessesElem = document.querySelector("#remaining-guesses")
+let wordAmount = "1"
 let game
 
-const startGame = async () => {
-    const puzzle = await getPuzzleAsync("2")
+const startGame = async (wordAmount) => {
+    const puzzle = await getPuzzleAsync(wordAmount)
     game = new Hangman(puzzle, 5)
     render()
 }
@@ -26,9 +27,16 @@ const render = () => {
     guessesElem.textContent = game.statusMessage
 }
 
-startGame()
+startGame(wordAmount)
 
-document.querySelector("#reset").addEventListener("click", startGame)
+document.querySelector("#reset").addEventListener("click", () => {
+    startGame(wordAmount)
+})
+
+document.querySelector("#select-word-amount").addEventListener("change", (e) => {
+    wordAmount = e.target.value
+    startGame(wordAmount)
+})
 
 window.addEventListener("keypress", function (e) {
     if (e.charCode > 96 || e.charCode < 123) {
@@ -36,19 +44,4 @@ window.addEventListener("keypress", function (e) {
         game.makeGuess(guess)
         render()
     }
-})
-
-
-
-//get country
-getLocationAsync().then((location) => getCountryNameAsync(location.country)).then((country) => {
-    console.log(`You are currently in ${country}`)
-}).catch((error) => {
-    console.log(error)
-})
-
-getCurrentCountry().then((country) => {
-    console.log(`You are currently in ${country}`)
-}).catch((error) => {
-    console.log(error)
 })

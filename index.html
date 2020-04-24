@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,21 +8,38 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="icon" href="images/favicon.png">
 </head>
+
 <body>
-    <div>
-        <div id="title">
-            <h1>Hangman Game</h1>
-        </div>
-        <div>
-            <p id="puzzle" class="puzzle"></p>
-            <p id="guessed-letters">Guessed letters:</p>
-            <p id="remaining-guesses"></p>
-            <button id="reset" class="button">Reset</button>
+
+    <div id="puzzle-title" class="puzzle-block">
+        <h1>Guess the word!</h1>
+        <div id="select-word-amount">
+            <label>
+                Word amount <select id="word-amount">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </label>
         </div>
     </div>
-    
+
+    <div id="puzzle-body" class="puzzle-block">
+        <p id="puzzle"></p>
+        <p id="guessed-letters">Guessed letters:</p>
+    </div>
+    <div id="puzzle-footer" class="puzzle-block">
+        <p id="remaining-guesses"></p>
+        <div id="button-wrapper">
+            <button id="reset" class="button">Reset</button>
+        </div>
+
+    </div>
+
+
     <script src="scripts/requests.js"></script>
     <script src="scripts/hangman.js"></script>
     <script src="scripts/app.js"></script>
 </body>
+
 </html>
