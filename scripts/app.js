@@ -41,12 +41,6 @@ window.addEventListener("keypress", function (e) {
 
 
 //get country
-getLocationAsync().then((location) => getCountryNameAsync(location.country)).then((country) => {
-    console.log(`You are currently in ${country}`)
-}).catch((error) => {
-    console.log(error)
-})
-
 getCurrentCountry().then((country) => {
     console.log(`You are currently in ${country}`)
 }).catch((error) => {
