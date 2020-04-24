@@ -8,11 +8,12 @@ const guessedLettersElem = document.querySelector("#guessed-letters")
 const puzzleElem = document.querySelector("#puzzle")
 const guessesElem = document.querySelector("#remaining-guesses")
 let wordAmount = "1"
+let guessesAmount = 3
 let game
 
-const startGame = async (wordAmount) => {
+const startGame = async (wordAmount, guessesAmount) => {
     const puzzle = await getPuzzleAsync(wordAmount)
-    game = new Hangman(puzzle, 5)
+    game = new Hangman(puzzle, guessesAmount)
     render()
 }
 
@@ -27,15 +28,24 @@ const render = () => {
     guessesElem.textContent = game.statusMessage
 }
 
-startGame(wordAmount)
+startGame(wordAmount, guessesAmount)
 
 document.querySelector("#reset").addEventListener("click", () => {
-    startGame(wordAmount)
+    startGame(wordAmount, guessesAmount)
 })
 
 document.querySelector("#select-word-amount").addEventListener("change", (e) => {
     wordAmount = e.target.value
-    startGame(wordAmount)
+    if (wordAmount === "1") {
+        guessesAmount = 3
+    } else if (wordAmount === "2") {
+        guessesAmount = 5
+    } else if (wordAmount === "3") {
+        guessesAmount = 7
+    } else {
+        console.log("Something went wrong!")
+    }
+    startGame(wordAmount, guessesAmount)
 })
 
 window.addEventListener("keypress", function (e) {
